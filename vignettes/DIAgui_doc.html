@@ -11,7 +11,7 @@
 
 <meta name="author" content="Marc-Antoine GERAULT" />
 
-<meta name="date" content="2023-02-09" />
+<meta name="date" content="2023-02-13" />
 
 <title>Process the output from the proteomics DIA-NN software</title>
 
@@ -1577,7 +1577,7 @@ border-radius: 0px;
 <h1 class="title toc-ignore">Process the output from the proteomics
 DIA-NN software</h1>
 <h4 class="author">Marc-Antoine GERAULT</h4>
-<h4 class="date">2023-02-09</h4>
+<h4 class="date">2023-02-13</h4>
 
 </div>
 
@@ -1591,23 +1591,15 @@ DIA-NN software</h1>
 “shiny”, “shinydashboard”, “shinycssloaders”, “shinyWidgets”,
 “shinyFiles”, “shinyjs”, “data.table”, “dplyr”, “tidyr”, “purrr”,
 “openxlsx”, “plotly”, “ggplot2”, “ggrepel”, “ggpubr”, “stringr”, “Rcpp”,
-“RcppEigen”, “iq”, “seqinr”, “DT”, “limma”</li>
+“RcppEigen”, “iq”, “seqinr”, “DT”</li>
 </ul>
-<p>One package is not from CRAN and hence will not be installed when you
-will install mineCETSAapp package: “limma”. For this package, you need
-to install it from BioConductor. For this, type this command in the R
-console :</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)){ <span class="co">#check if you already have the BiocManager package</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)  <span class="co">#if not, install it</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;limma&quot;</span>)</span></code></pre></div>
 <p>The DIAgui package is currently on github, so for installing it
-you’ll also need the “devtools” package. You can install the
-mineCETSAapp package with this commands:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)){ <span class="co">#check if you already have the devtools package</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)  <span class="co">#if not, install it</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;marseille-proteomique/DIAgui&quot;</span>)</span></code></pre></div>
+you’ll also need the “devtools” package. You can install the DIAgui
+package with this commands:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)){ <span class="co">#check if you already have the devtools package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)  <span class="co">#if not, install it</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;marseille-proteomique/DIAgui&quot;</span>)</span></code></pre></div>
 <p>You can access the same informations (and the source code) on the <a href="https://github.com/mgerault/DIAgui">github repository</a></p>
 <hr />
 </div>
@@ -1627,7 +1619,7 @@ directory, but only do it if you are sure and of course if your file
 exists.</p></li>
 <li><p>Activate <code>DIAgui</code> package by library it.</p></li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;DIAgui&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;DIAgui&quot;</span>)</span></code></pre></div>
 <hr />
 </div>
 <div id="analysis" class="section level2">
@@ -1635,7 +1627,7 @@ exists.</p></li>
 <div id="run-the-shiny-application" class="section level3">
 <h3>Run the shiny application</h3>
 <hr />
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runDIAgui</span>()      <span class="co">#this function will directly start the app</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runDIAgui</span>()      <span class="co">#this function will directly start the app</span></span></code></pre></div>
 <p>If you want more informations on how to use the app, I recommend you
 to watch the <a href="https://www.youtube.com/watch?v=vfvh15Q93eU">tutorial</a>.</p>
 </div>
@@ -1649,19 +1641,19 @@ data\space}\)</span></h4>
 in <a href="https://github.com/vdemichev/diann-rpackage">diann-rpcakge</a>
 from V. Demichev. This report was obtained from proteomics data from the
 SACCHAROMYCES CEREVISIAE.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> small_report</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(report) <span class="co">#take a look at the data</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> small_report</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(report) <span class="co">#take a look at the data</span></span></code></pre></div>
 <p>With this small dataset, you can easily test the functions from
 DIAgui package and also save it as a tsv file to test the shiny
 application.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(report, <span class="st">&quot;small_report.tsv&quot;</span>) <span class="co"># save the data as a tsv file</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(report, <span class="st">&quot;small_report.tsv&quot;</span>) <span class="co"># save the data as a tsv file</span></span></code></pre></div>
 </div>
 <div id="underline2.space-analyzespace-dia-nnspace-reportspace" class="section level4">
 <h4><span class="math inline">\(\underline{2.\space Analyze\space
 DIA-NN\space report\space}\)</span></h4>
 <p>If you want you can try the analysis on you own file. If so, you can
 import it with diann_load function:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">diann_load</span>(<span class="st">&quot;small_report.tsv&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">diann_load</span>(<span class="st">&quot;small_report.tsv&quot;</span>) </span></code></pre></div>
 <p>From this file, you can extract quantitative information on either
 the precursor level, peptide level, protein level or gene level. On the
 peptide level, you have the choice to use the MaxLFQ algorithm or not.
@@ -1671,114 +1663,114 @@ For this, we will need the diann_matrix function. It will filter the
 data according specific q-values and extract the quantification for each
 identifier (here the precursors). For more information, you can check
 the documentation of the function diann_matrix.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>precursor <span class="ot">&lt;-</span> <span class="fu">diann_matrix</span>(report, <span class="at">proteotypic.only =</span> <span class="cn">TRUE</span>, <span class="at">method =</span> <span class="st">&quot;max&quot;</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(precursor)  <span class="co"># check the results</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>precursor <span class="ot">&lt;-</span> <span class="fu">diann_matrix</span>(report, <span class="at">proteotypic.only =</span> <span class="cn">TRUE</span>, <span class="at">method =</span> <span class="st">&quot;max&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(precursor)  <span class="co"># check the results</span></span></code></pre></div>
 <p>We can apply the same method on the peptide level; we just need to
 precise the new id.header. You can either choose “Stripped.Sequence” or
 “Modified.Sequence”. In order to avoid any duplicates and not loose any
 informations, I strongly advised to only use the identifier
 “Modified.Sequence”</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>peptide <span class="ot">&lt;-</span> <span class="fu">diann_matrix</span>(report, <span class="at">id.header =</span> <span class="st">&quot;Modified.Sequence&quot;</span>,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">proteotypic.only =</span> <span class="cn">TRUE</span>, <span class="at">method =</span> <span class="st">&quot;max&quot;</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(peptide)  <span class="co"># check the results</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>peptide <span class="ot">&lt;-</span> <span class="fu">diann_matrix</span>(report, <span class="at">id.header =</span> <span class="st">&quot;Modified.Sequence&quot;</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">proteotypic.only =</span> <span class="cn">TRUE</span>, <span class="at">method =</span> <span class="st">&quot;max&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(peptide)  <span class="co"># check the results</span></span></code></pre></div>
 <p>You can also choose to use the MaxLFQ algorithm to extract the
 quantification at the peptide level. The iq R package is the fastest way
 to apply this algorithm. Before running it, we will need to filter our
 data according q-values.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> report <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> PG.Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> Protein.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> GG.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> iq<span class="sc">::</span><span class="fu">preprocess</span>(peptide_maxlfq,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">intensity_col =</span> <span class="st">&quot;Precursor.Normalised&quot;</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">primary_id =</span> <span class="st">&quot;Modified.Sequence.&quot;</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sample_id  =</span> <span class="st">&quot;File.Name&quot;</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">secondary_id =</span> <span class="st">&quot;Precursor.Id&quot;</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">median_normalization =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pdf_out =</span> <span class="cn">NULL</span>)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> iq<span class="sc">::</span><span class="fu">fast_MaxLFQ</span>(peptide_maxlfq)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> peptide_maxlfq<span class="sc">$</span>estimate</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(peptide_maxlfq)     </span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(peptide_maxlfq)  <span class="co"># check the results</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> report <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> PG.Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> Protein.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> GG.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> iq<span class="sc">::</span><span class="fu">preprocess</span>(peptide_maxlfq,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">intensity_col =</span> <span class="st">&quot;Precursor.Normalised&quot;</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">primary_id =</span> <span class="st">&quot;Modified.Sequence.&quot;</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sample_id  =</span> <span class="st">&quot;File.Name&quot;</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">secondary_id =</span> <span class="st">&quot;Precursor.Id&quot;</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">median_normalization =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pdf_out =</span> <span class="cn">NULL</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> iq<span class="sc">::</span><span class="fu">fast_MaxLFQ</span>(peptide_maxlfq)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> peptide_maxlfq<span class="sc">$</span>estimate</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(peptide_maxlfq)     </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(peptide_maxlfq)  <span class="co"># check the results</span></span></code></pre></div>
 <p>You can also use the diann_maxlfq function which calls C++ script
 which equivalent to the function from the <a href="https://github.com/vdemichev/diann-rpackage">diann-rpcakge</a>
 from V. Demichev. It gives equivalent results but it is 10 times
 slower.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> report <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> PG.Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> Protein.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> GG.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> <span class="fu">diann_maxlfq</span>(peptide_maxlfq,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group.header =</span> <span class="st">&quot;Modified.Sequence&quot;</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id.header =</span> <span class="st">&quot;Precursor.Id&quot;</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">quantity.header =</span> <span class="st">&quot;Precursor.Normalised&quot;</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">count_pep =</span> <span class="cn">FALSE</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        )   </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(peptide_maxlfq)  <span class="co"># check the results</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> report <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> PG.Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> Protein.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> GG.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>peptide_maxlfq <span class="ot">&lt;-</span> <span class="fu">diann_maxlfq</span>(peptide_maxlfq,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">group.header =</span> <span class="st">&quot;Modified.Sequence&quot;</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id.header =</span> <span class="st">&quot;Precursor.Id&quot;</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">quantity.header =</span> <span class="st">&quot;Precursor.Normalised&quot;</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">count_pep =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        )   </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(peptide_maxlfq)  <span class="co"># check the results</span></span></code></pre></div>
 <p>You have the exact same two options for the protein level. However,
 we will focus here on the use of diann_matrix as iq R package is already
 well documented. We will see how to extract the number of peptides used
 for the quantification and estimate abundances with the Top3 and iBAQ
 methods. This step is meant for people who are already confident with R
 and don’t want to use the shiny app.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">&lt;-</span> re <span class="sc">%&gt;%</span> report <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> PG.Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> Protein.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> GG.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>n_cond <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(df<span class="sc">$</span>File.Name))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>protein_maxlfq <span class="ot">&lt;-</span> <span class="fu">diann_maxlfq</span>(protein,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">group.header=</span><span class="st">&quot;Protein.Group&quot;</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">id.header =</span> <span class="st">&quot;Precursor.Id&quot;</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">quantity.header =</span> <span class="st">&quot;Precursor.Normalised&quot;</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">only_countsall =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Top3 =</span> <span class="cn">TRUE</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                  )</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># extract useful information from report</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>nc <span class="ot">&lt;-</span> <span class="fu">ncol</span>(protein_maxlfq)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>protein_maxlfq<span class="sc">$</span>Protein.Group <span class="ot">&lt;-</span> <span class="fu">rownames</span>(protein_maxlfq)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(protein_maxlfq) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(protein_maxlfq)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">&lt;-</span> protein[(protein<span class="sc">$</span>Protein.Group <span class="sc">%in%</span> protein_maxlfq<span class="sc">$</span>Protein.Group),]</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">&lt;-</span> protein[<span class="fu">order</span>(protein<span class="sc">$</span>Protein.Group),]</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>protein_maxlfq<span class="sc">$</span>Protein.Names <span class="ot">&lt;-</span> <span class="fu">unique</span>(protein[,<span class="fu">c</span>(<span class="st">&quot;Protein.Group&quot;</span>, <span class="st">&quot;Protein.Names&quot;</span>)])<span class="sc">$</span>Protein.Names</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>protein_maxlfq<span class="sc">$</span>First.Protein.Description <span class="ot">&lt;-</span> <span class="fu">unique</span>(protein[,<span class="fu">c</span>(<span class="st">&quot;Protein.Group&quot;</span>, <span class="st">&quot;First.Protein.Description&quot;</span>)])<span class="sc">$</span>First.Protein.Description</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>protein_maxlfq<span class="sc">$</span>Genes <span class="ot">&lt;-</span> <span class="fu">unique</span>(protein[,<span class="fu">c</span>(<span class="st">&quot;Protein.Group&quot;</span>, <span class="st">&quot;Genes&quot;</span>)])<span class="sc">$</span>Genes</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>protein_maxlfq <span class="ot">&lt;-</span> protein_maxlfq[,<span class="fu">c</span>((nc<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span><span class="fu">ncol</span>(protein_maxlfq), <span class="dv">1</span><span class="sc">:</span>nc)]</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># get iBAQ quantification</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>protein_seq <span class="ot">&lt;-</span> <span class="fu">getallseq</span>(<span class="at">pr_id =</span> protein_maxlfq<span class="sc">$</span>Protein.Group,</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>                         <span class="at">spec =</span> <span class="st">&quot;SACCHAROMYCES CEREVISIAE&quot;</span>)</span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># here, the function makes a query to swissprot to get the amino-acid sequence from each protein, so it can be long</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co"># you can also put one or several FASTA files (go check getallseq documentation)</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co"># to compute iBAQ quantification you&#39;ll the raw intensities</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">diann_matrix</span>(report, <span class="at">id.header =</span> <span class="st">&quot;Protein.Group&quot;</span>,</span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>                             <span class="at">quantity.header =</span> <span class="st">&quot;Precursor.Quantity&quot;</span>,</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>                             <span class="at">method =</span> <span class="st">&quot;sum&quot;</span>)</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>raw<span class="sc">$</span>Genes <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>raw<span class="sc">$</span>Protein.Names <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co"># compute iBAQ quantification </span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">get_iBAQ</span>(raw, <span class="at">proteinDB =</span> protein_seq,</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>                <span class="at">id_name =</span> <span class="st">&quot;Protein.Group&quot;</span>,</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>                <span class="at">ecol =</span> <span class="dv">2</span><span class="sc">:</span>(n_cond<span class="sc">+</span><span class="dv">1</span>),</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>                <span class="at">peptideLength =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">36</span>),</span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>                <span class="at">proteaseRegExp =</span> DIAgui<span class="sc">:::</span><span class="fu">getProtease</span>(<span class="st">&quot;trypsin&quot;</span>),</span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>                <span class="at">log2_transformed =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> raw[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span>(n_cond<span class="sc">+</span><span class="dv">1</span>))]</span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>protein_maxlfq <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(protein_maxlfq, raw, <span class="at">by =</span> <span class="st">&quot;Protein.Group&quot;</span>)</span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(protein_maxlfq)  <span class="co"># check the results</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">&lt;-</span> re <span class="sc">%&gt;%</span> report <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> PG.Q.Value <span class="sc">&lt;=</span> <span class="fl">0.01</span> <span class="sc">&amp;</span> Protein.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span> <span class="sc">&amp;</span> GG.Q.Value <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n_cond <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(df<span class="sc">$</span>File.Name))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>protein_maxlfq <span class="ot">&lt;-</span> <span class="fu">diann_maxlfq</span>(protein,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">group.header=</span><span class="st">&quot;Protein.Group&quot;</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">id.header =</span> <span class="st">&quot;Precursor.Id&quot;</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">quantity.header =</span> <span class="st">&quot;Precursor.Normalised&quot;</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">only_countsall =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">Top3 =</span> <span class="cn">TRUE</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># extract useful information from report</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>nc <span class="ot">&lt;-</span> <span class="fu">ncol</span>(protein_maxlfq)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>protein_maxlfq<span class="sc">$</span>Protein.Group <span class="ot">&lt;-</span> <span class="fu">rownames</span>(protein_maxlfq)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(protein_maxlfq) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(protein_maxlfq)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">&lt;-</span> protein[(protein<span class="sc">$</span>Protein.Group <span class="sc">%in%</span> protein_maxlfq<span class="sc">$</span>Protein.Group),]</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">&lt;-</span> protein[<span class="fu">order</span>(protein<span class="sc">$</span>Protein.Group),]</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>protein_maxlfq<span class="sc">$</span>Protein.Names <span class="ot">&lt;-</span> <span class="fu">unique</span>(protein[,<span class="fu">c</span>(<span class="st">&quot;Protein.Group&quot;</span>, <span class="st">&quot;Protein.Names&quot;</span>)])<span class="sc">$</span>Protein.Names</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>protein_maxlfq<span class="sc">$</span>First.Protein.Description <span class="ot">&lt;-</span> <span class="fu">unique</span>(protein[,<span class="fu">c</span>(<span class="st">&quot;Protein.Group&quot;</span>, <span class="st">&quot;First.Protein.Description&quot;</span>)])<span class="sc">$</span>First.Protein.Description</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>protein_maxlfq<span class="sc">$</span>Genes <span class="ot">&lt;-</span> <span class="fu">unique</span>(protein[,<span class="fu">c</span>(<span class="st">&quot;Protein.Group&quot;</span>, <span class="st">&quot;Genes&quot;</span>)])<span class="sc">$</span>Genes</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>protein_maxlfq <span class="ot">&lt;-</span> protein_maxlfq[,<span class="fu">c</span>((nc<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span><span class="fu">ncol</span>(protein_maxlfq), <span class="dv">1</span><span class="sc">:</span>nc)]</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># get iBAQ quantification</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>protein_seq <span class="ot">&lt;-</span> <span class="fu">getallseq</span>(<span class="at">pr_id =</span> protein_maxlfq<span class="sc">$</span>Protein.Group,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                         <span class="at">spec =</span> <span class="st">&quot;SACCHAROMYCES CEREVISIAE&quot;</span>)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co"># here, the function makes a query to swissprot to get the amino-acid sequence from each protein, so it can be long</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co"># you can also put one or several FASTA files (go check getallseq documentation)</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="co"># to compute iBAQ quantification you&#39;ll the raw intensities</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">diann_matrix</span>(report, <span class="at">id.header =</span> <span class="st">&quot;Protein.Group&quot;</span>,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>                             <span class="at">quantity.header =</span> <span class="st">&quot;Precursor.Quantity&quot;</span>,</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>                             <span class="at">method =</span> <span class="st">&quot;sum&quot;</span>)</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>raw<span class="sc">$</span>Genes <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>raw<span class="sc">$</span>Protein.Names <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="co"># compute iBAQ quantification </span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">get_iBAQ</span>(raw, <span class="at">proteinDB =</span> protein_seq,</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>                <span class="at">id_name =</span> <span class="st">&quot;Protein.Group&quot;</span>,</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>                <span class="at">ecol =</span> <span class="dv">2</span><span class="sc">:</span>(n_cond<span class="sc">+</span><span class="dv">1</span>),</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>                <span class="at">peptideLength =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">36</span>),</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>                <span class="at">proteaseRegExp =</span> DIAgui<span class="sc">:::</span><span class="fu">getProtease</span>(<span class="st">&quot;trypsin&quot;</span>),</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>                <span class="at">log2_transformed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> raw[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span>(n_cond<span class="sc">+</span><span class="dv">1</span>))]</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>protein_maxlfq <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(protein_maxlfq, raw, <span class="at">by =</span> <span class="st">&quot;Protein.Group&quot;</span>)</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(protein_maxlfq)  <span class="co"># check the results</span></span></code></pre></div>
 <p>Finally, you can also extract the quantification on the gene level
 with diann_matrix with which you can extract the number of peptides used
 for the quantification and the Top3 quantification.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">diann_matrix</span>(report,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">id.header=</span><span class="st">&quot;Genes&quot;</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">quantity.header=</span><span class="st">&quot;Genes.MaxLFQ.Unique&quot;</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">proteotypic.only =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">get_pep =</span> <span class="cn">TRUE</span>, <span class="at">only_pepall =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Top3 =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">&quot;max&quot;</span>) </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(genes)  <span class="co"># check the results</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>genes <span class="ot">&lt;-</span> <span class="fu">diann_matrix</span>(report,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">id.header=</span><span class="st">&quot;Genes&quot;</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">quantity.header=</span><span class="st">&quot;Genes.MaxLFQ.Unique&quot;</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">proteotypic.only =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">get_pep =</span> <span class="cn">TRUE</span>, <span class="at">only_pepall =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Top3 =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">method =</span> <span class="st">&quot;max&quot;</span>) </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(genes)  <span class="co"># check the results</span></span></code></pre></div>
 <p>As you can see, it can be a lot of writing. That is why we also
 provide a function to all this step at once, using the iq package to be
 faster to compute the MaxLFQ algorithm. It also plot a density plot, an
@@ -1786,9 +1778,9 @@ MDS plot and the retention time vs the i-retention time. The results are
 save in one folder and the data can be saved as an xlsx, txt or csv
 file. For example, if you want to extract the protein.group
 quantification and the iBAQ from your file:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">report_process</span>(<span class="st">&quot;small_report.tsv&quot;</span>, <span class="co"># needs to be path to a report file</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">get_iBAQ =</span> <span class="cn">TRUE</span>, <span class="at">get_Top3 =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">species =</span> <span class="st">&quot;SACCHAROMYCES CEREVISIAE&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">report_process</span>(<span class="st">&quot;small_report.tsv&quot;</span>, <span class="co"># needs to be path to a report file</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">get_iBAQ =</span> <span class="cn">TRUE</span>, <span class="at">get_Top3 =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">species =</span> <span class="st">&quot;SACCHAROMYCES CEREVISIAE&quot;</span>)</span></code></pre></div>
 <p>Once you obtained the data you wanted, you can save it as csv, txt or
 xlsx file. You can always use these files in the shiny app to visualize
 your data.</p>
@@ -1802,23 +1794,23 @@ dataset. Your data needs to have a columns that corresponds to the id
 you’re interested in (in our example the genes). If you don’t, the
 rownames will be taken but the rownames have to be non numerical. To
 avoid potential confusion, the best is to name one column ‘id’:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(genes)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;id&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(genes)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;id&quot;</span></span></code></pre></div>
 <p>You can either plot a density plot, an MDS plot or an interactive
 heatmap:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># density plot</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">densityDIA</span>(genes, <span class="at">transformation =</span>  <span class="st">&quot;log2&quot;</span>, <span class="at">area =</span> <span class="cn">TRUE</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>, <span class="at">tit =</span> <span class="st">&quot;My plot&quot;</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># MDS plot</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">MDS_DIA</span>(genes, <span class="at">transformation =</span>  <span class="st">&quot;log2&quot;</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>, <span class="at">tit =</span> <span class="st">&quot;My plot&quot;</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># interactive heatmap</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmapDIA</span>(genes, <span class="at">transformation =</span> <span class="st">&quot;log2&quot;</span>, <span class="at">print_val =</span> <span class="cn">FALSE</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># density plot</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">densityDIA</span>(genes, <span class="at">transformation =</span>  <span class="st">&quot;log2&quot;</span>, <span class="at">area =</span> <span class="cn">TRUE</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>, <span class="at">tit =</span> <span class="st">&quot;My plot&quot;</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># MDS plot</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">MDS_DIA</span>(genes, <span class="at">transformation =</span>  <span class="st">&quot;log2&quot;</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>, <span class="at">tit =</span> <span class="st">&quot;My plot&quot;</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># interactive heatmap</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">heatmapDIA</span>(genes, <span class="at">transformation =</span> <span class="st">&quot;log2&quot;</span>, <span class="at">print_val =</span> <span class="cn">FALSE</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>)</span></code></pre></div>
 <p>You can also visualize the proportion of valid values according the
 percentage of identifiers (here the genes) for an accepted specific
 percentage of missing value:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validDIA</span>(genes, <span class="st">&quot;log2&quot;</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>, <span class="at">prop_cut =</span> <span class="fl">0.75</span>) <span class="co"># we keep approximately 90% of the genes</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">validDIA</span>(genes, <span class="st">&quot;log2&quot;</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>, <span class="at">prop_cut =</span> <span class="fl">0.3</span>) <span class="co"># we keep all genes</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">validDIA</span>(genes, <span class="st">&quot;log2&quot;</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>, <span class="at">prop_cut =</span> <span class="fl">0.75</span>) <span class="co"># we keep approximately 90% of the genes</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">validDIA</span>(genes, <span class="st">&quot;log2&quot;</span>, <span class="at">data_type =</span> <span class="st">&quot;intensity&quot;</span>, <span class="at">prop_cut =</span> <span class="fl">0.3</span>) <span class="co"># we keep all genes</span></span></code></pre></div>
 <p>For the last function, get_bestwind, you’ll need the report-lib file
 from the DIA-NN’s outputs; it needs to have “FileName” and “ProductMz”
 columns. From this file (so from a first experiment), you can extract

@@ -60,6 +60,7 @@ MDS_DIA <- function(data, transformation = c("log2", "none"),
     }
   }
   tit2 <- ""
+  transformation <- match.arg(transformation)
   if(transformation == "log2"){
     if(stringr::str_length(tit) == 0){
       tit2 <- ", Log2 transformed"
@@ -73,8 +74,12 @@ MDS_DIA <- function(data, transformation = c("log2", "none"),
     tit <- paste0(deparse(substitute(data)), tit2)
   }
 
-  bad <- rowSums(is.finite(as.matrix(m))) < ncol(m)
-  if(nrow(as.matrix(m)[!bad, , drop = FALSE]) == 0){
+  m <- as.matrix(m)
+  bad <- rowSums(is.finite(m)) < ncol(m)
+  if(any(bad)){
+    m <- m[!bad, , drop = FALSE]
+  }
+  if(nrow(m) == 0){
     p <- ggplot2::ggplot(data.frame(x = c(0,1), y = c(0,1)), ggplot2::aes(x,y, label = "s")) +
       ggplot2::geom_text(x=0.5, y=0.5, label = "No rows with only finite value", size = 10) +
       ggplot2::theme(axis.text.x = ggplot2::element_blank(),
@@ -85,14 +90,23 @@ MDS_DIA <- function(data, transformation = c("log2", "none"),
             axis.ticks.y = ggplot2::element_blank())
   }
   else{
-    m <- limma::plotMDS(m, plot = FALSE)
-    m <- data.frame(x = m$x, y = m$y, row.names = rownames(m$distance.matrix.squared))
-    m$name <- rownames(m)
+    nbsamples <- ncol(m)
+    namesample <- colnames(m)
+    dd <- matrix(0,nrow=nbsamples,ncol=nbsamples,dimnames=list(namesample,namesample))
+    for (i in 2:(nbsamples)){
+      for (j in 1:(i-1)){
+        dd[i,j]=sqrt(mean((m[,i]-m[,j])^2))
+      }
+    }
 
+    m <- cmdscale(as.dist(dd), k=2)
+    m <- as.data.frame(m)
+    colnames(m) <- c("x", "y")
+    m$name <- rownames(m)
 
     p <- ggplot2::ggplot(m, ggplot2::aes(x, y, color = name)) +
       ggplot2::geom_point(size = 1.8) +
-      ggrepel::geom_label_repel(ggplot2::aes(label = name), max.overlaps = Inf) +
+      ggrepel::geom_label_repel(ggplot2::aes(label = name), max.overlaps = Inf, min.segment.length = 0) +
       ggplot2::labs(title = tit,
            subtitle = "MDS plot",
            x = "Dimension 1", y = "Dimension 2") +

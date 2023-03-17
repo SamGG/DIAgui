@@ -19,19 +19,10 @@ vignette: >
 * R version > 4.0.0 
 * Rstudio version > 1.0
 * Dependent packages:  
-"shiny", "shinydashboard", "shinycssloaders", "shinyWidgets", "shinyFiles", "shinyjs", "data.table", "dplyr", "tidyr", "purrr", "openxlsx", "plotly", "ggplot2", "ggrepel", "ggpubr", "stringr", "Rcpp", "RcppEigen", "iq", "seqinr", "DT", "limma"
- 
-One package is not from CRAN and hence will not be installed when you will install mineCETSAapp package: "limma". For this package, you need to install it from BioConductor. For this, type this command in the R console :
-
-```{r, eval=FALSE}
-if(!requireNamespace("BiocManager", quietly = TRUE)){ #check if you already have the BiocManager package
- install.packages("BiocManager")  #if not, install it
-}
-BiocManager::install("limma")
-```
+"shiny", "shinydashboard", "shinycssloaders", "shinyWidgets", "shinyFiles", "shinyjs", "data.table", "dplyr", "tidyr", "purrr", "openxlsx", "plotly", "ggplot2", "ggrepel", "ggpubr", "stringr", "Rcpp", "RcppEigen", "iq", "seqinr", "DT"
 
 The DIAgui package is currently on github, so for installing it you'll also need the "devtools" package.
-You can install the mineCETSAapp package with this commands:
+You can install the DIAgui package with this commands:
 
 ```{r, eval=FALSE}
 if(!requireNamespace("devtools", quietly = TRUE)){ #check if you already have the devtools package

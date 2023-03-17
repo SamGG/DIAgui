@@ -27,8 +27,8 @@ diann_matrix(
 
 \item{quantity.header}{Quantity column name}
 
-\item{proteotypic.only}{logical; should only proteotypic peptides and the
-respective proteins be considered?}
+\item{proteotypic.only}{logical; Only proteotypic peptides and the
+respective proteins should be considered?}
 
 \item{q}{Precursor q-value threshold}
 
@@ -43,7 +43,7 @@ respective proteins be considered?}
 \item{only_pepall}{logical; should only keep peptide counts all or also
 peptide counts for each fractions?}
 
-\item{margin}{TBD}
+\item{margin}{quantities below exp(margin) might be treated as NA}
 
 \item{Top3}{logical; get Top3 absolute quantification}
 

@@ -61,6 +61,7 @@ densityDIA <- function(data, transformation = c("log2", "none"), area = FALSE,
     }
   }
   tit2 <- ""
+  transformation <- match.arg(transformation)
   if(transformation == "log2"){
     if(stringr::str_length(tit) == 0){
       tit2 <- ", Log2 transformed"

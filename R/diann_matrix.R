@@ -6,8 +6,8 @@
 #' @param x data, output from diann_load
 #' @param id.header Id column name (protein, gene, ...)
 #' @param quantity.header Quantity column name
-#' @param proteotypic.only logical; should only proteotypic peptides and the
-#'   respective proteins be considered?
+#' @param proteotypic.only logical; Only proteotypic peptides and the
+#'   respective proteins should be considered?
 #' @param q Precursor q-value threshold
 #' @param protein.q Uniquely identified protein q-value threshold
 #' @param pg.q Protein group q-value threshold
@@ -15,7 +15,7 @@
 #' @param get_pep logical; get peptide count?
 #' @param only_pepall logical; should only keep peptide counts all or also
 #'   peptide counts for each fractions?
-#' @param margin TBD
+#' @param margin quantities below exp(margin) might be treated as NA
 #' @param Top3 logical; get Top3 absolute quantification
 #' @param method When for one identifier there are several values, take either
 #'   maximum of these or sum them all. When using 'sum', any additional

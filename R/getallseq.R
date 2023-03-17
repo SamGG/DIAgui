@@ -88,19 +88,25 @@ getallseq <- function(spec = "Saccharomyces cerevisiae",
       }
 
       if(!inherits(search, "try-error")){
-        if(verbose){
-          message(paste0(quer, "; ", ni, "/", n))
+        if(length(search$req)){  # query didn't throw error but returned nothing; for example if protein is not from same species
+          if(verbose){
+            message(paste0(quer, "; ", ni, "/", n))
+          }
+          ni = ni + 1
+          sequ <- seqinr::getSequence(search$req[[1]])
+          sequ <- paste(sequ, collapse = "")
+          seq_res[[i]] <- sequ
+          if (sequ == "NA"){
+            mybank <- seqinr::choosebank(bank_name)
+          }
+          if(stringr::str_detect(seqinr::getName(search$req[[1]]), "^\\d{1}")){
+            message("Reopening bank. Last protein name starts with a digit.")
+            mybank <- seqinr::choosebank(bank_name)
+          }
         }
-        ni = ni + 1
-        sequ <- seqinr::getSequence(search$req[[1]])
-        sequ <- paste(sequ, collapse = "")
-        seq_res[[i]] <- sequ
-        if (sequ == "NA"){
-          mybank <- seqinr::choosebank(bank_name)
-        }
-        if(stringr::str_detect(seqinr::getName(search$req[[1]]), "^\\d{1}")){
-          message("Reopening bank. Last protein name starts with a digit.")
-          mybank <- seqinr::choosebank(bank_name)
+        else{
+          message(paste("Couldn't find sequence in bank", bank_name, "for protein", i))
+          seq_res[[i]] <- NA
         }
       }
       else{

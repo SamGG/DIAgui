@@ -27,11 +27,11 @@ diann_maxlfq(
 
 \item{quantity.header}{Quantity column name}
 
-\item{margin}{TBD}
+\item{margin}{quantities below exp(margin) might be treated as NA}
 
-\item{count_pep}{logical; get peptide count ?}
+\item{count_pep}{logical; get peptide count?}
 
-\item{only_countsall}{logical; should only keep peptide counts all or also peptide counts for each fractions ?}
+\item{only_countsall}{logical; should only keep peptide counts all or also peptide counts for each fractions?}
 
 \item{Top3}{logical; get Top3 absolute quantification}
 }

@@ -1,10 +1,4 @@
 ## ---- eval=FALSE--------------------------------------------------------------
-#  if(!requireNamespace("BiocManager", quietly = TRUE)){ #check if you already have the BiocManager package
-#   install.packages("BiocManager")  #if not, install it
-#  }
-#  BiocManager::install("limma")
-
-## ---- eval=FALSE--------------------------------------------------------------
 #  if(!requireNamespace("devtools", quietly = TRUE)){ #check if you already have the devtools package
 #   install.packages("devtools")  #if not, install it
 #  }
