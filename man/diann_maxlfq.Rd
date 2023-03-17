@@ -27,11 +27,13 @@ diann_maxlfq(
 
 \item{quantity.header}{Quantity column name}
 
+\item{margin}{TBD}
+
+\item{count_pep}{logical; get peptide count ?}
+
+\item{only_countsall}{logical; should only keep peptide counts all or also peptide counts for each fractions ?}
+
 \item{Top3}{logical; get Top3 absolute quantification}
-
-\item{get_pep}{logical; get peptide count ?}
-
-\item{only_pepall}{logical; should only keep peptide counts all or also peptide counts for each fractions ?}
 }
 \value{
 A dataframe containing the quantities from the id you selected

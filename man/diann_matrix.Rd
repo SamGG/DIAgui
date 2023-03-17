@@ -27,7 +27,8 @@ diann_matrix(
 
 \item{quantity.header}{Quantity column name}
 
-\item{proteotypic.only}{logical; Only proteotypic peptides and the respective proteins should be considered ?}
+\item{proteotypic.only}{logical; should only proteotypic peptides and the
+respective proteins be considered?}
 
 \item{q}{Precursor q-value threshold}
 
@@ -37,20 +38,24 @@ diann_matrix(
 
 \item{gg.q}{Gene group q-value threshold}
 
-\item{get_pep}{logical; get peptide count ?}
+\item{get_pep}{logical; get peptide count?}
 
-\item{only_pepall}{logical; should only keep peptide counts all or also peptide counts for each fractions ?}
+\item{only_pepall}{logical; should only keep peptide counts all or also
+peptide counts for each fractions?}
+
+\item{margin}{TBD}
 
 \item{Top3}{logical; get Top3 absolute quantification}
 
-\item{method}{When for one identifier there are several values,
-take either maximum of these or sum them all. When using 'sum', any additional information than
-the id.header shouldn't be taken account. 'max' report for only one id, 'sum' get the summed intensities
-from all ids.}
+\item{method}{When for one identifier there are several values, take either
+maximum of these or sum them all. When using 'sum', any additional
+information than the id.header should be ignored. 'max' reports for only
+one id, 'sum' get the sum of the intensities of all ids.}
 }
 \value{
 A dataframe containing the quantities from the id you selected
 }
 \description{
-Generate matrix with quantities (zero will be replaced by NA values) and eventually peptides count.
+Generate matrix with quantities (zero will be replaced by NA values) and
+eventually peptides count.
 }
