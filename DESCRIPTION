@@ -45,5 +45,3 @@ Enhances:
 LinkingTo: 
     Rcpp,
     RcppEigen
-VignetteBuilder:
-    knitr
